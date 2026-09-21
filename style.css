@@ -1,0 +1,488 @@
+/* =========================================================
+   Tennistavolo Cascina — stylesheet
+   Palette e misure sono tutte qui sotto: cambia :root e
+   cambia il sito.
+   ========================================================= */
+
+:root{
+  --bg:            #0b0e13;
+  --bg-alt:        #111620;
+  --surface:       #161c27;
+  --line:          rgba(255,255,255,.10);
+  --text:          #e8eef5;
+  --muted:         #94a2b5;
+  --accent:        #d81e34;   /* rosso del logo */
+  --accent-dark:   #a8121f;
+  --gold:          #e9b949;
+  --bronze:        #b87333;
+  --green:         #12603f;   /* verde tavolo */
+  --radius:        14px;
+  --wrap:          1180px;
+  --display:       'Anton', 'Arial Narrow', sans-serif;
+  --body:          'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; scroll-padding-top:78px; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+img,svg,iframe{ max-width:100%; }
+a{ color:inherit; }
+
+.wrap{ width:min(100% - 40px, var(--wrap)); margin-inline:auto; }
+
+h1,h2,h3,h4{ font-family:var(--display); font-weight:400; letter-spacing:.02em; line-height:1.05; margin:0 0 .5em; }
+h2{ font-size:clamp(2rem, 4.4vw, 3.3rem); text-transform:uppercase; }
+h3{ font-size:1.35rem; letter-spacing:.03em; }
+p{ margin:0 0 1.1em; }
+.accent{ color:var(--accent); }
+.center{ text-align:center; }
+.muted{ color:var(--muted); font-size:.92rem; }
+.muted.small{ font-size:.8rem; margin-top:1rem; }
+
+.kicker{
+  font-size:.78rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent); font-weight:600; margin:0 0 .6em;
+}
+.kicker.center{ text-align:center; }
+.section-lead{ color:var(--muted); max-width:62ch; margin:0 auto 3rem; }
+.section-note{ color:var(--muted); font-size:.85rem; font-style:italic; margin-top:1.5rem; }
+.head-note{ color:var(--muted); font-size:.85rem; margin:0; }
+
+/* ---------- bottoni ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:15px 30px; border:1px solid transparent; border-radius:999px;
+  font-weight:700; font-size:.88rem; letter-spacing:.09em; text-transform:uppercase;
+  text-decoration:none; cursor:pointer; transition:.2s ease;
+}
+.btn-primary{ background:var(--accent); color:#fff; }
+.btn-primary:hover{ background:var(--accent-dark); transform:translateY(-2px); }
+.btn-ghost{ border-color:rgba(255,255,255,.35); color:var(--text); }
+.btn-ghost:hover{ background:rgba(255,255,255,.08); border-color:var(--text); }
+.btn.full{ width:100%; }
+
+.link-arrow{
+  display:inline-block; color:var(--accent); font-weight:600; text-decoration:none;
+  letter-spacing:.04em;
+}
+.link-arrow:hover{ text-decoration:underline; }
+.link-arrow.small{ font-size:.85rem; }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  padding:14px 0; transition:.28s ease;
+  background:linear-gradient(to bottom, rgba(11,14,19,.9), rgba(11,14,19,0));
+}
+.site-header.scrolled{
+  padding:8px 0; background:rgba(11,14,19,.94);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--line);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
+
+.logo{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
+.logo-mark{ width:46px; height:auto; flex:none; }
+.logo-text{ font-family:var(--display); line-height:1; display:flex; flex-direction:column; }
+.logo-text .l1{ font-size:1.12rem; color:var(--accent); letter-spacing:.02em; }
+.logo-text .l2{ font-size:.86rem; letter-spacing:.3em; color:var(--text); }
+
+.nav{ display:flex; align-items:center; gap:22px; }
+.nav a{
+  text-decoration:none; font-size:.8rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--text); opacity:.85; transition:.2s;
+}
+.nav a:hover{ opacity:1; color:var(--accent); }
+.nav .nav-cta{
+  background:var(--accent); color:#fff; opacity:1;
+  padding:11px 20px; border-radius:999px;
+}
+.nav .nav-cta:hover{ background:var(--accent-dark); color:#fff; }
+
+.burger{
+  display:none; flex-direction:column; gap:5px; background:none; border:0;
+  padding:8px; cursor:pointer;
+}
+.burger span{ width:26px; height:2px; background:var(--text); transition:.25s; }
+.burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2){ opacity:0; }
+.burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative; min-height:100svh; display:flex; align-items:center;
+  overflow:hidden; padding:130px 0 80px; background:var(--bg);
+}
+.hero-photo{
+  position:absolute; inset:0;
+  background:url('assets/esultanza.jpg') center 28% / cover no-repeat;
+}
+.hero-photo::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(105deg, rgba(11,14,19,.96) 0%, rgba(11,14,19,.86) 42%, rgba(11,14,19,.35) 100%),
+    linear-gradient(to top, rgba(11,14,19,1) 2%, rgba(11,14,19,0) 45%);
+}
+
+.hero-inner{ position:relative; z-index:2; }
+.eyebrow{
+  font-size:.78rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:1.2rem;
+}
+.hero-title{
+  font-family:var(--display); font-size:clamp(3.2rem, 10.5vw, 8.6rem);
+  line-height:.92; letter-spacing:.01em; margin:0 0 1.5rem;
+  text-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+.hero-title .outline{
+  color:transparent; -webkit-text-stroke:2px var(--accent);
+}
+.hero-sub{ max-width:56ch; color:#d3dce7; font-size:1.1rem; }
+.hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-top:2.2rem; }
+
+.hero-badges{ display:flex; flex-wrap:wrap; gap:12px; margin-top:2.6rem; }
+.badge{
+  font-size:.78rem; letter-spacing:.06em; color:#d3dce7;
+  border:1px solid var(--line); border-radius:999px; padding:8px 16px;
+  background:rgba(22,28,39,.72); backdrop-filter:blur(6px);
+}
+.badge strong{ color:var(--accent); font-weight:700; }
+
+.scroll-hint{
+  position:absolute; left:50%; bottom:24px; translate:-50% 0; z-index:2;
+  width:42px; height:42px; display:grid; place-items:center;
+  border:1px solid var(--line); border-radius:50%; text-decoration:none;
+  color:var(--muted); animation:bob 2.2s ease-in-out infinite;
+  background:rgba(11,14,19,.5);
+}
+@keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(7px) } }
+
+/* =========================================================
+   STATS
+   ========================================================= */
+.stats{ background:var(--accent); color:#fff; padding:34px 0; }
+.stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center; }
+.stat{ display:flex; flex-direction:column; gap:2px; }
+.stat .num{ font-family:var(--display); font-size:clamp(2rem,4vw,3rem); line-height:1; }
+.stat .lbl{ font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; opacity:.92; }
+
+/* =========================================================
+   SEZIONI
+   ========================================================= */
+.section{ padding:110px 0; }
+.section-alt{ background:var(--bg-alt); }
+
+.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.section-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:24px; margin-bottom:3rem; flex-wrap:wrap;
+}
+.section-head h2{ margin:0; }
+
+/* ---------- foto ---------- */
+.photo{ margin:0; }
+.photo img{
+  display:block; width:100%; height:auto; border-radius:var(--radius);
+  border:1px solid var(--line); box-shadow:0 26px 60px rgba(0,0,0,.45);
+}
+.photo figcaption{ color:var(--muted); font-size:.82rem; margin-top:.8rem; text-align:center; }
+
+.check-list{ list-style:none; padding:0; margin:0 0 1.6rem; }
+.check-list li{ position:relative; padding-left:30px; margin-bottom:.6rem; color:#c6d1de; }
+.check-list li::before{
+  content:""; position:absolute; left:0; top:.55em;
+  width:14px; height:8px; border-left:2px solid var(--accent);
+  border-bottom:2px solid var(--accent); transform:rotate(-45deg);
+}
+
+/* ---------- card (corsi e squadre) ---------- */
+.cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+.cards.cards-3{ grid-template-columns:repeat(3,1fr); }
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:30px 26px; transition:.25s ease;
+}
+.card:hover{ transform:translateY(-6px); border-color:rgba(216,30,52,.55); }
+.card.featured{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+.card-age{
+  display:inline-block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:700; margin-bottom:.8rem;
+}
+.card p{ color:var(--muted); font-size:.95rem; }
+.card ul{ list-style:none; padding:0; margin:0; border-top:1px solid var(--line); padding-top:14px; }
+.card ul li{ font-size:.85rem; color:#c6d1de; padding:3px 0; }
+.card.no-tag h3{ margin-top:2.05rem; }
+
+/* ---------- foto dei titoli individuali ---------- */
+.medal-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:2.6rem; }
+.medal{
+  margin:0; border-radius:var(--radius); overflow:hidden;
+  border:1px solid var(--line); background:var(--surface); position:relative;
+}
+.medal img{ display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center top; transition:.4s ease; }
+.medal:hover img{ transform:scale(1.04); }
+.medal figcaption{
+  position:absolute; inset:auto 0 0 0; padding:36px 14px 14px;
+  background:linear-gradient(to top, rgba(7,10,14,.96) 45%, transparent);
+  display:flex; flex-direction:column; gap:3px;
+}
+.medal figcaption strong{ font-size:.88rem; letter-spacing:.02em; }
+.medal figcaption span{ font-size:.72rem; color:var(--accent); font-weight:600; letter-spacing:.04em; }
+
+/* ---------- striscia foto ---------- */
+.band{ position:relative; height:clamp(260px, 46vh, 460px); overflow:hidden; }
+.band img{ display:block; width:100%; height:100%; object-fit:cover; object-position:center 42%; }
+.band::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgba(11,14,19,.55) 0%, rgba(11,14,19,.1) 30%, rgba(11,14,19,.1) 70%, rgba(11,14,19,.75) 100%);
+}
+
+/* ---------- serie / campionati ---------- */
+.series-grid{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:14px; margin-top:2.6rem;
+}
+.serie{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px 10px; text-align:center; transition:.25s ease;
+}
+.serie:hover{ transform:translateY(-6px); border-color:rgba(216,30,52,.55); }
+.serie-name{
+  display:block; font-family:var(--display); font-size:2.2rem; line-height:1;
+  letter-spacing:.04em; margin-bottom:.4rem;
+}
+.serie-lbl{
+  display:block; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted);
+}
+.serie.top{ background:var(--accent); border-color:var(--accent); }
+.serie.top .serie-name{ color:#fff; }
+.serie.top .serie-lbl{ color:rgba(255,255,255,.88); }
+
+/* ---------- qualità ---------- */
+.quality-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:3rem; }
+.quality{ text-align:center; }
+.q-icon{
+  width:56px; height:56px; color:var(--accent); margin-bottom:1rem;
+  padding:12px; border:1px solid var(--line); border-radius:50%; background:var(--surface);
+}
+.quality p{ color:var(--muted); font-size:.93rem; }
+
+/* ---------- staff ---------- */
+.staff-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+.coach{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:34px 28px; text-align:center;
+}
+.avatar{
+  width:96px; height:96px; margin:0 auto 1.2rem; border-radius:50%;
+  display:grid; place-items:center;
+  background:linear-gradient(135deg, #2a323f, #0b0e13);
+  border:2px solid var(--accent);
+  font-family:var(--display); font-size:1.7rem; color:var(--text);
+}
+.coach .role{ color:var(--accent); font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; }
+.coach blockquote{
+  margin:1rem 0 0; color:var(--muted); font-size:.93rem;
+  border-top:1px solid var(--line); padding-top:1rem;
+}
+
+/* ---------- news ---------- */
+.news-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+.news-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden; display:flex; flex-direction:column; transition:.25s;
+}
+.news-card:hover{ transform:translateY(-6px); }
+.news-img{ display:block; width:100%; aspect-ratio:16/10; object-fit:cover; }
+.news-body{ padding:24px; display:flex; flex-direction:column; gap:.4rem; flex:1; }
+.news-body .date{ font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+.news-body h3{ font-size:1.15rem; margin:.2rem 0 .4rem; }
+.news-body p{ color:var(--muted); font-size:.92rem; flex:1; }
+
+/* ---------- form ---------- */
+.trial{
+  background:
+    radial-gradient(760px 420px at 85% 15%, rgba(216,30,52,.16), transparent 60%),
+    var(--bg);
+}
+.form-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:34px; box-shadow:0 26px 60px rgba(0,0,0,.4);
+}
+.field{ margin-bottom:16px; }
+.field label{
+  display:block; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:6px; font-weight:600;
+}
+.field input,.field select,.field textarea{
+  width:100%; padding:13px 15px; border-radius:10px;
+  background:#0d121a; border:1px solid var(--line); color:var(--text);
+  font-family:inherit; font-size:.97rem; transition:.2s;
+}
+.field textarea{ resize:vertical; }
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(216,30,52,.2);
+}
+.field .invalid{ border-color:#ff4d4d; }
+.check{ display:flex; gap:12px; align-items:flex-start; margin:8px 0 22px; font-size:.86rem; color:var(--muted); }
+.check input{ margin-top:4px; accent-color:var(--accent); width:17px; height:17px; flex:none; }
+.form-msg{ margin:14px 0 0; font-size:.9rem; min-height:1.2em; }
+.form-msg.ok{ color:#4ade80; }
+.form-msg.err{ color:#ff6b6b; }
+.contact-inline a{ color:var(--accent); text-decoration:none; font-weight:600; }
+.contact-inline a:hover{ text-decoration:underline; }
+
+/* ---------- orari + mappa ---------- */
+.hours{ width:100%; border-collapse:collapse; font-size:.95rem; }
+.hours th,.hours td{ padding:14px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+.hours th{ width:150px; font-family:var(--display); font-weight:400; letter-spacing:.08em; text-transform:uppercase; }
+.hours td{ color:var(--muted); }
+.slot{ display:block; padding:3px 0; }
+.slot b{ color:var(--text); font-weight:600; margin-right:8px; white-space:nowrap; }
+.slot.free b{ color:var(--accent); }
+.slot.soon,.slot.closed{ font-style:italic; }
+.addr{ color:#c6d1de; }
+.map{ border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); margin-top:1.5rem; }
+.map iframe{ display:block; width:100%; height:290px; border:0; filter:grayscale(.25) contrast(1.05); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{ background:#070a0e; border-top:1px solid var(--line); padding:64px 0 26px; }
+.footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; }
+.footer-logo{ margin-bottom:1rem; }
+.footer-nav h4{ font-size:.8rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+.footer-nav a{ display:block; text-decoration:none; color:var(--muted); font-size:.9rem; padding:4px 0; }
+.footer-nav a:hover{ color:var(--text); }
+.socials{ display:flex; gap:12px; }
+.socials a{
+  width:40px; height:40px; display:grid; place-items:center; padding:0;
+  border:1px solid var(--line); border-radius:50%; transition:.2s;
+}
+.socials a:hover{ background:var(--accent); border-color:var(--accent); }
+.socials svg{ width:19px; height:19px; fill:currentColor; }
+.footer-bottom{
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  margin-top:48px; padding-top:22px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:.82rem;
+}
+.footer-bottom a{ text-decoration:none; }
+.footer-bottom a:hover{ color:var(--text); }
+
+/* =========================================================
+   ANIMAZIONE DI INGRESSO
+   ========================================================= */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible{ opacity:1; transform:none; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:1100px){
+  .nav{ gap:16px; }
+  .nav a{ font-size:.74rem; }
+}
+
+@media (max-width:1024px){
+  .cards,.cards.cards-3,.quality-grid{ grid-template-columns:repeat(2,1fr); }
+  .series-grid{ grid-template-columns:repeat(4,1fr); }
+  .staff-grid,.news-grid{ grid-template-columns:repeat(2,1fr); }
+  .footer-grid{ grid-template-columns:1fr 1fr; }
+  .medal-grid{ grid-template-columns:repeat(3,1fr); }
+}
+
+@media (max-width:860px){
+  .burger{ display:flex; }
+  .nav{
+    position:fixed; inset:0 0 0 auto; width:min(82vw, 330px);
+    flex-direction:column; align-items:flex-start; justify-content:center; gap:20px;
+    background:rgba(9,12,17,.98); backdrop-filter:blur(14px);
+    padding:90px 34px; transform:translateX(100%); transition:transform .3s ease;
+    border-left:1px solid var(--line); overflow-y:auto;
+  }
+  .nav.open{ transform:none; }
+  .nav a{ font-size:1rem; }
+  .two-col{ grid-template-columns:1fr; gap:44px; }
+  .section{ padding:76px 0; }
+  .stats-grid{ grid-template-columns:repeat(2,1fr); gap:26px; }
+  .medal-grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+@media (max-width:620px){
+  body{ font-size:16px; }
+  .cards,.quality-grid,.footer-grid{ grid-template-columns:1fr; }
+
+  /* corsi, campionati, staff e palmares: scorrimento orizzontale a scatto invece della lista */
+  .cards.cards-3,
+  .series-grid,
+  .staff-grid,
+  .news-grid{
+    display:flex; grid-template-columns:none; flex-wrap:nowrap;
+    overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; padding-bottom:6px;
+    margin-inline:-20px; padding-inline:20px;
+    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+            mask-image:linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+  }
+  .cards.cards-3::-webkit-scrollbar,
+  .series-grid::-webkit-scrollbar,
+  .staff-grid::-webkit-scrollbar,
+  .medal-grid::-webkit-scrollbar,
+  .news-grid::-webkit-scrollbar{ display:none; }
+  .cards.cards-3{ gap:14px; }
+  .cards.cards-3 .card{ flex:0 0 74%; scroll-snap-align:center; }
+  .series-grid{ gap:10px; }
+  .series-grid .serie{ flex:0 0 29%; scroll-snap-align:start; }
+  .staff-grid{ gap:14px; margin-top:0; }
+  .staff-grid .coach{ flex:0 0 60%; scroll-snap-align:center; }
+  /* Del Guasta e Di Fiore per primi nello scorrimento */
+  .staff-grid .coach:nth-child(4){ order:-2; }
+  .staff-grid .coach:nth-child(3){ order:-1; }
+  .news-grid{ gap:14px; }
+  .news-grid .news-card{ flex:0 0 70%; scroll-snap-align:center; }
+  .medal-grid{
+    display:grid; grid-auto-flow:column;
+    grid-template-columns:none; grid-template-rows:repeat(2, auto);
+    grid-auto-columns:50%; gap:14px; margin-top:2rem;
+    overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; padding-bottom:6px;
+    margin-inline:-20px; padding-inline:20px;
+    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+            mask-image:linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+  }
+  .medal-grid .medal{ scroll-snap-align:center; }
+  /* Mattia Mori primo, poi Simi/Borsani, poi Grulliero/Campagna */
+  .medal-grid .medal:nth-child(3){ order:-3; } /* Mattia Mori */
+  .medal-grid .medal:nth-child(2){ order:-2; } /* Tommaso Simi e Borsani */
+  .medal-grid .medal:nth-child(5){ order:-1; } /* Grulliero e Campagna */
+
+  .serie{ padding:18px 6px; }
+  .serie-name{ font-size:1.7rem; }
+  .hero{ min-height:94svh; }
+  .hero-actions .btn{ width:100%; }
+  .form-card{ padding:24px; }
+  .hours th{ width:110px; }
+  .logo-mark{ width:38px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+  .reveal{ opacity:1; transform:none; }
+}
