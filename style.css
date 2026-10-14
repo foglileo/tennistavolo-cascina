@@ -374,6 +374,7 @@ p{ margin:0 0 1.1em; }
 /* =========================================================
    FINESTRA ROSE SQUADRE
    ========================================================= */
+.rose-overlay[hidden]{ display:none; }
 .rose-overlay{
   position:fixed; inset:0; z-index:90;
   display:grid; place-items:center; padding:20px;
