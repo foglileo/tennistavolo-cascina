@@ -132,7 +132,6 @@
       { nome: 'B1B', girone: 'Girone C', capitano: 'Emanuele Vasta',
         giocatori: ['Tommaso Simi', 'Lorenzo Tavoletiti'] }
     ] },
-    B2: { titolo: 'Serie B2', sotto: 'Campionato nazionale', squadre: [] },
     C1: { titolo: 'Serie C1', sotto: 'Campionato nazionale', squadre: [
       { nome: 'C1A', girone: 'Girone I', capitano: 'Lorenzo Frosini',
         giocatori: ['Enrico Gabriele Nita', 'Jan Smdrkal', 'Niccolò Tozzini'] },
@@ -175,6 +174,20 @@
       { nome: 'D3 Cascina', girone: '', capitano: 'Daniele Caciagli',
         giocatori: ['Giuliano Acconci', 'Giuliano Giorgetti', 'Francesca Bedeschi', 'Sara Tagliamenti',
           'Paolo Zaccagnini', 'Maria Binetti', 'Valentino Pratelli'] }
+    ] },
+    A2F: { titolo: 'Serie A2 femminile', sotto: 'Campionato nazionale', squadre: [
+      { nome: 'A2 Femminile', girone: 'Girone D', ruolo: 'Allenatore', capitano: 'Marco Borsani',
+        giocatori: ['Viola Nita', 'Aurora Paoli', 'Bianca Bracco', 'Alice Borsani'] }
+    ] },
+    CF: { titolo: 'Serie C femminile', sotto: 'Campionato regionale', squadre: [
+      { nome: 'C Femminile', girone: '', ruolo: 'Allenatore', capitano: 'Eugenio Quartieri',
+        giocatori: ['Chiara Quartieri', 'Ginevra Ruggeri', 'Luisa Giuricin', 'Elke Freudl'] }
+    ] },
+    DF: { titolo: 'Serie D femminile', sotto: 'Campionato regionale', squadre: [
+      { nome: 'D Femminile', girone: '',
+        giocatori: ['Sara Tagliamenti', 'Francesca Badeschi', 'Maria Binetti', 'Elena Del Guasta',
+          'Laura Della Cort', 'Mariori Sepulveda', 'Sara Adragna', 'Elisa Bernardini',
+          'Sonia Mastropietro', 'Alessandrina Ceban'] }
     ] }
   };
 
@@ -202,14 +215,17 @@
     }
 
     var ul = document.createElement('ul');
-    var cap = document.createElement('li');
-    cap.className = 'capitano';
-    var ruolo = document.createElement('span');
-    ruolo.className = 'ruolo';
-    ruolo.textContent = 'Capitano';
-    cap.appendChild(ruolo);
-    cap.appendChild(document.createTextNode(sq.capitano));
-    ul.appendChild(cap);
+
+    if (sq.capitano) {
+      var cap = document.createElement('li');
+      cap.className = 'capitano';
+      var ruolo = document.createElement('span');
+      ruolo.className = 'ruolo';
+      ruolo.textContent = sq.ruolo || 'Capitano';
+      cap.appendChild(ruolo);
+      cap.appendChild(document.createTextNode(sq.capitano));
+      ul.appendChild(cap);
+    }
 
     sq.giocatori.forEach(function (nome) {
       var li = document.createElement('li');
