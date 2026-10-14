@@ -97,17 +97,18 @@
     <p class="kicker center">Squadre</p>
     <h2 class="center">I NOSTRI CAMPIONATI</h2>
     <div class="series-grid">
-      <div class="serie top">
+      <button type="button" class="serie top" data-serie="B1">
         <span class="serie-name">B1</span>
         <span class="serie-lbl">Prima squadra</span>
-      </div>
-      <div class="serie"><span class="serie-name">B2</span><span class="serie-lbl">Nazionale</span></div>
-      <div class="serie"><span class="serie-name">C1</span><span class="serie-lbl">Nazionale</span></div>
-      <div class="serie"><span class="serie-name">C2</span><span class="serie-lbl">Regionale</span></div>
-      <div class="serie"><span class="serie-name">D1</span><span class="serie-lbl">Regionale</span></div>
-      <div class="serie"><span class="serie-name">D2</span><span class="serie-lbl">Regionale</span></div>
-      <div class="serie"><span class="serie-name">D3</span><span class="serie-lbl">Regionale</span></div>
+      </button>
+      <button type="button" class="serie" data-serie="B2"><span class="serie-name">B2</span><span class="serie-lbl">Nazionale</span></button>
+      <button type="button" class="serie" data-serie="C1"><span class="serie-name">C1</span><span class="serie-lbl">Nazionale</span></button>
+      <button type="button" class="serie" data-serie="C2"><span class="serie-name">C2</span><span class="serie-lbl">Regionale</span></button>
+      <button type="button" class="serie" data-serie="D1"><span class="serie-name">D1</span><span class="serie-lbl">Regionale</span></button>
+      <button type="button" class="serie" data-serie="D2"><span class="serie-name">D2</span><span class="serie-lbl">Regionale</span></button>
+      <button type="button" class="serie" data-serie="D3"><span class="serie-name">D3</span><span class="serie-lbl">Regionale</span></button>
     </div>
+    <p class="series-hint">Tocca una serie per vedere le squadre e le rose &middot; stagione 2026/27</p>
   </div>
 </section>
 
@@ -466,6 +467,20 @@
     <span><a href="#">Privacy policy</a> &middot; <a href="#">Cookie policy</a></span>
   </div>
 </footer>
+
+<!-- ============ FINESTRA ROSE SQUADRE ============ -->
+<div class="rose-overlay" id="rose-overlay" hidden>
+  <div class="rose-panel" role="dialog" aria-modal="true" aria-labelledby="rose-titolo">
+    <div class="rose-head">
+      <div>
+        <p class="kicker" id="rose-kicker">Squadre 2026/27</p>
+        <h2 id="rose-titolo">Serie</h2>
+      </div>
+      <button type="button" class="rose-close" id="rose-close" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="rose-body" id="rose-body"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

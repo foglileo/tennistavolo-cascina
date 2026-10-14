@@ -259,8 +259,13 @@ p{ margin:0 0 1.1em; }
 .serie{
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
   padding:26px 10px; text-align:center; transition:.25s ease;
+  font:inherit; color:inherit; cursor:pointer; display:block; width:100%;
 }
 .serie:hover{ transform:translateY(-6px); border-color:rgba(216,30,52,.55); }
+.serie:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.series-hint{
+  text-align:center; color:var(--muted); font-size:.82rem; margin:1.6rem 0 0;
+}
 .serie-name{
   display:block; font-family:var(--display); font-size:2.2rem; line-height:1;
   letter-spacing:.04em; margin-bottom:.4rem;
@@ -359,6 +364,64 @@ p{ margin:0 0 1.1em; }
 .addr{ color:#c6d1de; }
 .map{ border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); margin-top:1.5rem; }
 .map iframe{ display:block; width:100%; height:290px; border:0; filter:grayscale(.25) contrast(1.05); }
+
+/* =========================================================
+   FINESTRA ROSE SQUADRE
+   ========================================================= */
+.rose-overlay{
+  position:fixed; inset:0; z-index:90;
+  display:grid; place-items:center; padding:20px;
+  background:rgba(5,7,10,.82); backdrop-filter:blur(6px);
+  opacity:0; transition:opacity .2s ease;
+}
+.rose-overlay.aperto{ opacity:1; }
+.rose-panel{
+  width:min(100%, 900px); max-height:86vh; overflow-y:auto;
+  background:var(--bg-alt); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  transform:translateY(12px); transition:transform .2s ease;
+}
+.rose-overlay.aperto .rose-panel{ transform:none; }
+.rose-head{
+  position:sticky; top:0; z-index:2;
+  display:flex; align-items:flex-start; justify-content:space-between; gap:20px;
+  padding:26px 28px 18px; background:var(--bg-alt);
+  border-bottom:1px solid var(--line);
+}
+.rose-head h2{ margin:0; font-size:clamp(1.6rem, 4vw, 2.4rem); }
+.rose-head .kicker{ margin-bottom:.35em; }
+.rose-close{
+  flex:none; width:40px; height:40px; border-radius:50%; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); color:var(--text);
+  font-size:1.5rem; line-height:1; transition:.2s ease;
+}
+.rose-close:hover{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.rose-close:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+.rose-body{
+  padding:24px 28px 30px;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:18px;
+}
+.rosa{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px 20px;
+}
+.rosa h3{ font-size:1.3rem; margin:0 0 .2em; color:var(--accent); }
+.rosa-girone{
+  margin:0 0 .9rem; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted);
+}
+.rosa ul{ list-style:none; margin:0; padding:0; }
+.rosa li{
+  font-size:.92rem; color:#c6d1de; padding:5px 0; border-bottom:1px solid rgba(255,255,255,.05);
+}
+.rosa li:last-child{ border-bottom:0; }
+.rosa li.capitano{ color:var(--text); font-weight:600; }
+.rosa li.capitano .ruolo{
+  display:block; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:700; margin-bottom:2px;
+}
+.rose-vuoto{ color:var(--muted); font-style:italic; margin:0; }
 
 /* =========================================================
    FOOTER
@@ -475,6 +538,10 @@ p{ margin:0 0 1.1em; }
 
   .serie{ padding:18px 6px; }
   .serie-name{ font-size:1.7rem; }
+  .rose-overlay{ padding:0; }
+  .rose-panel{ max-height:100dvh; height:100dvh; border-radius:0; border:0; width:100%; }
+  .rose-head{ padding:20px 20px 14px; }
+  .rose-body{ padding:18px 20px 30px; grid-template-columns:1fr; gap:14px; }
   .hero{ min-height:94svh; }
   .hero-actions .btn{ width:100%; }
   .form-card{ padding:24px; }
